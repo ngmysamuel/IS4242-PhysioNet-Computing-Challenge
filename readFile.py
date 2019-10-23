@@ -22,12 +22,13 @@ put_multiple_into_dataframe(txt): Multiple is for using it with the output of re
 
 def read_text(fold_name):
     txt_all = list()
-    for f in os.listdir(fold_name): # for each file in the directory
-        with open(os.path.join(fold_name, f), 'r') as fp: # open each file
-            txt = fp.readlines() # read inside the file
-        recordid = txt[1].rstrip('\n').split(',')[-1] # get recordid
-        txt = [[int(recordid)] + t.rstrip('\n').split(',') for t in txt] # preface each row with the recordid as all patients are 1 file
-        txt_all.extend(txt[1:]) # skip the parameter list
+	if f.endswith(".txt"):
+		for f in os.listdir(fold_name): # for each file in the directory
+			with open(os.path.join(fold_name, f), 'r') as fp: # open each file
+				txt = fp.readlines() # read inside the file
+			recordid = txt[1].rstrip('\n').split(',')[-1] # get recordid
+			txt = [[int(recordid)] + t.rstrip('\n').split(',') for t in txt] # preface each row with the recordid as all patients are 1 file
+			txt_all.extend(txt[1:]) # skip the parameter list
     return txt_all
 
 def read_ans(file_name):
