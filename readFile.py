@@ -22,8 +22,8 @@ put_multiple_into_dataframe(txt): Multiple is for using it with the output of re
 
 def read_text(fold_name):
     txt_all = list()
-	if f.endswith(".txt"):
-		for f in os.listdir(fold_name): # for each file in the directory
+	for f in os.listdir(fold_name): # for each file in the directory
+		if f.endswith(".txt"):
 			with open(os.path.join(fold_name, f), 'r') as fp: # open each file
 				txt = fp.readlines() # read inside the file
 			recordid = txt[1].rstrip('\n').split(',')[-1] # get recordid
